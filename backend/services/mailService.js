@@ -14,7 +14,7 @@ const sendMail = async ({ from, to, subject, text, html }) => {
 
         // Send mail with the defined transport object
         const info = await transporter.sendMail({
-            from: `inShare <${from}>`, // sender address
+            from: `SweetShare <${from}>`, // sender address
             to: to, // list of receivers
             subject: subject, // subject line
             text: text, // plain text body

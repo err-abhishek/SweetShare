@@ -62,7 +62,7 @@ router.post('/send', async (req, res) => {
         sendMail({
             from: emailFrom,
             to: emailTo,
-            subject: 'inShare file sharing',
+            subject: 'SweetShare file sharing',
             text: `${emailFrom} shared a file with you.`,
             html: emailTemplate({
                 emailFrom,
