@@ -131,7 +131,7 @@ const onFileUploadSuccess = (res) => {
 
   standing.innerText = "Uploaded";
 
-  // - The button was likely disabled during the upload process to prevent multiple submissions.
+  // - The button was  disabled during the upload process to prevent multiple submissions.
   // - The button text is changed back to "Send" to indicate it is now active and ready for the user to send the link.
   emailForm[2].removeAttribute("disabled");
   emailForm[2].innerText = "Send";

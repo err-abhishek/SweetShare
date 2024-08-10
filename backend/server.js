@@ -34,10 +34,8 @@ app.set("view engine", "ejs");
 // Route handlers
 app.use("/api/files", uploadFile);
 app.use("/files", showFile);
-app.use("/files/download", downloadFile); // Corrected the path
-app.get("/",(req,res)=>{
-  res.send("Hi,Abhi");
-})
+app.use("/files/download", downloadFile); 
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

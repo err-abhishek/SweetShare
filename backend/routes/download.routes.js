@@ -22,17 +22,3 @@ router.get("/:uuid", async (req, res) => {
 });
 
 export default router;
-
-/*fileURLToPath is a function from the url module in Node.js that converts a file URL to a file system path.
-
-Here's a breakdown:
-
-- fileURL: A URL that starts with file://, representing a file on the local file system.
-- ToPath: Converts the file URL to a file system path, which can be used with Node.js file system functions.
-
-Example:
-
-import { fileURLToPath } from "url";
-const fileUrl = new URL('file:///Users/username/Documents/file.txt');
-const filePath = fileURLToPath(fileUrl);
-console.log(filePath); // Output: /Users/username/Documents/file.txt*/
