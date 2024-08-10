@@ -17,3 +17,6 @@ const fileSchema = new Schema(
 const File = mongoose.model("File", fileSchema);
 
 export default File;
+
+// A callback is a function passed as an argument to another function.
+// Functions running in parallel with other functions are called asynchronous
