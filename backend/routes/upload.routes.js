@@ -46,15 +46,18 @@ router.post("/", (req, res) => {
       });
       const response = await file.save();
       // Respond with the file download link, including the unique identifier
-      res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}` });
+      console.log("File saved successfully, sending response...");
+      res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}`});
     } catch (error) {
       // If an error occurred while saving the file to the database, respond with a 500 status
+      console.log(error);
       res.status(500).send({ error: "Failed to save file" });
     }
   });
 });
 
 router.post("/send", async (req, res) => {
+ 
   const { uuid, emailTo, emailFrom, expiresIn } = req.body;
   if (!uuid || !emailTo || !emailFrom) {
     return res

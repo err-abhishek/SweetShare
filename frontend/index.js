@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "https://sweetsharebackend-abhisheks-projects-bda1edf4.vercel.app";
+const baseURL = "http://localhost:3000";
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
@@ -54,17 +54,21 @@ dropZone.addEventListener("dragover", (e) => {
 });
 
 dropZone.addEventListener("dragleave", (e) => {
+  e.preventDefault();
   dropZone.classList.remove("dragged");
 });
 
 // file input change and uploader
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener("change", (e) => {
+  e.preventDefault();
   if (fileInput.files[0].size > maxAllowedSize) {
     showToast("Max file size is 100MB");
     fileInput.value = ""; // reset the input
     return;
   }
+
   uploadFile();
+
 });
 
 // Add an event listener to the copy URL button
@@ -82,21 +86,21 @@ fileURL.addEventListener("click", () => {
 const uploadFile = () => {
   // fileInput.files returns a FileList object, which is an array-like object containing the selected files
   files = fileInput.files;
-
   // FormData is a built-in JavaScript object that allows us to create a set of key-value pairs
   const formData = new FormData();
-
+  
   //selecting the first file from the FileList object (files[0]) and appending it to the FormData object with the key "myfile"
   formData.append("myfile", files[0]);
-
+  
   // Show the uploader progress container
   progressContainer.style.display = "block";
-
+  
   // XMLHttpRequest is a built-in JavaScript object that allows us to make HTTP requests
   const xhr = new XMLHttpRequest();
-
+  
   // The onprogress event is triggered periodically during the upload process, allowing us to update the progress indicator
-  xhr.upload.onprogress = function (event) {
+
+  xhr.upload.onprogress =  function (event) {
     let percent = Math.round((100 * event.loaded) / event.total);
     progressPercent.innerText = percent;
     // bgProgress and progressBar are  HTML elements that display the upload progress as a visual bar
@@ -106,7 +110,7 @@ const uploadFile = () => {
   };
   // The onerror event is triggered if there is an error during the upload process
   xhr.upload.onerror = function () {
-    showToast(`Error in upload: ${xhr.standing}.`);
+    showToast(`Error in upload: ${xhr.standing}`);
     fileInput.value = "";
   };
   // Listen for the response from the server
@@ -116,12 +120,12 @@ const uploadFile = () => {
     // readyState 4 indicates that the request has completed
     if (xhr.readyState == XMLHttpRequest.DONE) {
       // Call the success function with the response text
+     
       onFileUploadSuccess(xhr.responseText);
     }
   };
   // Prepare the request to the server
   xhr.open("POST", uploadURL); // Set up a POST request to the specified upload URL
-
   // Send the request along with the file data
   xhr.send(formData); // This initiates the file upload to the server
 };
@@ -146,7 +150,9 @@ const onFileUploadSuccess = (res) => {
   sharingContainer.style.display = "block";
 
   // Set the value of the file URL input field to the received URL
+
   fileURL.value = url;
+
 };
 
 // Add an event listener to the form that triggers when the form is submitted

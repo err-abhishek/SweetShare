@@ -35,6 +35,9 @@ app.set("view engine", "ejs");
 app.use("/api/files", uploadFile);
 app.use("/files", showFile);
 app.use("/files/download", downloadFile); 
+app.get("/",(req,res)=>{
+  res.send("Hi,Abhi");
+})
 
 // Start the server
 app.listen(PORT, () => {
