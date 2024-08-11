@@ -14,9 +14,19 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const allowedClients = process.env.ALLOWED_CLIENTS;
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedClients.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 // Middleware setup
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.static("public"));
 app.use(express.json());
 
