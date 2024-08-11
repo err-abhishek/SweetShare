@@ -92,6 +92,7 @@ router.post("/send", async (req, res) => {
         return res.status(500).json({ error: "Error in email sending." });
       });
   } catch (err) {
+    console.log("Error uploading file:", err);
     return res.status(500).send({ error: "Something went wrong." });
   }
 });

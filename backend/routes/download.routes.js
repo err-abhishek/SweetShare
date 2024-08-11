@@ -16,7 +16,7 @@ router.get("/:uuid", async (req, res) => {
     const filePath = path.join(__dirname, "..", file.path);
     res.download(filePath);
   } catch (err) {
-    console.error(err);
+    console.log("Error downloading file", err);
     res.status(500).send("Server Error");
   }
 });
